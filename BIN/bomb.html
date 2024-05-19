@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+:root {
+	--fire-width: 50px;
+	--fire-blur: 0;
+	--fire-blur: calc(var(--fire-width) * 0.03);
+	--color-start: orangered;
+	--color-end: yellow;
+}
+
+#bomb {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background: radial-gradient(circle at 66% 33%, #555, black 50%);
+	position: relative;
+	display: grid;
+	place-items: center;
+	box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.5);
+}
+#bomb:before {
+	content: "";
+	width: 5px;
+	height: 25px;
+	background: linear-gradient(
+		to bottom right,
+		#630 40%,
+		peru 48%,
+		peru 52%,
+		#630 60%
+	);
+	background-size: 10px 10px;
+	border-radius: 15px 15px 0 0;
+	position: absolute;
+	left: 80%;
+	top: -15.5%;
+	transform: rotate(50deg);
+	z-index: -1;
+}
+#bomb:after {
+	content: "";
+	width: 10px;
+	height: 10px;
+	background: linear-gradient(to top, black, #222);
+	border-radius: 15px 15px 0 0;
+	position: absolute;
+	left: 75%;
+	top: 0;
+	transform: rotate(50deg);
+	z-index: -1;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+
+#flame_box {
+	width: 2px;
+	height: 5px;
+	position: absolute;
+	left: 100%;
+	top: -12.5%;
+	border-radius: 0 0 100% 100%;
+	border-radius: 50% / 40% 40% 60% 60%;
+}
+.flame {
+	width: calc(var(--fire-width) * 0.05);
+	height: calc(var(--fire-width) * 0.05);
+	border-radius: 50%;
+	background: var(--color-start);
+	position: absolute;
+	bottom: 0;
+	transform: translateX(-50%);
+	filter: blur(var(--fire-blur));
+	animation: burn 1.5s ease-in forwards;
+}
+@keyframes burn {
+	0% {
+		opacity: 0;
+	}
+	10% {
+		opacity: 1;
+	}
+	100% {
+		background: var(--color-end);
+		bottom: calc(var(--fire-width) * 0.75);
+		opacity: 0;
+		transform: translateX(-50%) scale(0.2);
+	}
+}
+</style>
+<center>
+<body>
+    <div id='bomb'>
+        <div id='flame_box'></div>
+        <div id='time'></div>
+      </div>
+</body>
+</center>
+<script>
+
+const box = document.querySelector("#flame_box");
+
+function addFlame() {
+	var f = document.createElement("div");
+	f.className = "flame";
+	f.style.left = Math.random() * 100 + "%";
+	f.style.animationDuration = Math.random() < 0.5 ? "3s" : "1.5s";
+	f.onanimationend = function () {
+		this.remove();
+	};
+	box.appendChild(f);
+}
+
+setInterval(function () {
+	addFlame();
+
+	document.querySelector(
+		"#time"
+	).innerHTML = `<span>time left today</span>${result}<span>don't waste it</span>`;
+}, 1000 / 30);
+
+
+</script>
+
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    
+    body{
+        background: #253759;
+        font-family: 'Poppins', sans-serif;
+        animation: transitionIn 0.5s;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+    @keyframes transitionIn {
+      from {
+        opacity: 0;
+        transform: translateX(100px);
+      }
+      to{
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    h1{
+        color: white;
+        font-size: 125px;
+        margin: 0;
+        padding: 0;
+        margin-bottom: 0px;
+        line-height: 0.9;
+        text-align: left;
+        display: inline-block;
+    }
+    .title{
+        padding: 0;
+        margin: 60px;
+        display: inline-block;
+    }
+    .container{
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        border: solid black 1px;
+    }
+    button{
+        width: 350px;
+        height: 50px;
+        text-align: left;
+        color: white;
+        font-size: 30px;
+        border: none;
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border-radius: 10px;
+        animation: transitionIn 0.5s;
+    }
+    button:hover{
+        background-color: rgb(0, 0, 0);
+        transform: scale(1.3) translateX(55px);
+    }
+    h1:hover{
+        cursor:pointer;
+    }
+    .diffbtn{
+        display: none;
+    }
+    .homebtn{
+       display: inline-block;
+    }
+    h2{
+        color: white;
+    }
+
+    .modal, .modal2{
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: all 0.3s ease-in-out;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.open, .modal2.open{
+  opacity: 1;
+  z-index: 999;
+}
+
+.modal-inner{
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  padding: 15px 25px;
+  text-align: justify;
+  text-justify: inter-word;
+  width: 500px;
+}
+.modal-inner2{
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  padding: 50px;
+  text-align: center;
+  width: 50vw;
+  justify-content: justify;
+}
+.modal-inner button, .modal-inner2 button{
+    width: 70%;
+    margin: 5px;
+    font-size: 20px;
+    text-align: center;
+    background-color: rgba(45, 59, 255, 0.8);
+
+}
+.modal-inner button:hover, .modal-inner2 button:hover{
+    transition: all 0.1s ease-in-out;
+    background-color: rgb(0, 17, 255);
+    transform: scale(1.02);
+}
+
+.modal-inner h2, .modal-inner2 h2{
+  margin: 0;
+  color: black;
+  font-size: 60px;
+}
+
+.modal-inner p, .modal-inner2 p{
+  line-height: 24px;
+  margin: 10px 0;
+  text-align: justify;
+  text-justify: inter-word;
+} 
+
+.box, .box2, .box3{
+  width: 100vw;
+  height: 100vh;
+  float: right;
+  position: absolute;
+  z-index: -1;
+}
+.triangle{
+  border-right: 100vw solid #00072D;
+  border-top: 100vh solid transparent;
+}
+
+.triangle2{
+  border-right: 60vw solid whitesmoke;
+  border-top: 100vh solid transparent;
+}
+
+.triangle3{
+  border-right: 25vw solid #00072D;
+  border-top: 100vh solid transparent;
+}
+
+
+
+</style>
+<body>
+    <div class="box">
+      <div class="triangle"></div>
+    </div>
+    <div class="box2">
+      <div class="triangle2"></div>
+    </div>
+    <div class="box3">
+      <div class="triangle3"></div>
+    </div>
+    <div class="title">
+    <h1 data-value='MATCH&#10;AND&#10;MATH'>MATCH <br>AND<br> MATH</h1><br>
+    <div class="homebtn" id="homebtn">
+        <button id="homebtnPlay" onclick="play()">PLAY</button> <br><br>
+        <button id="openModal2">How to Play</button><br><br>
+    </div>
+
+    <div id="diffbtn" class="diffbtn">
+        <a href="EASY/index_EasyDiff.html"><button>Easy</button></a><br><br>
+        <a href="MEDIUM/index_MediumDiff.html"><button>Medium</button></a><br><br>
+        <a href="HARD/index_HardDiff.html"><button>Hard</button></a><br><br>
+        <a href="ASIAN/index_AsianDiff.html"><button>Asian</button></a><br><br>
+        <button onclick="back()">Back</button>
+    </div>
+  <div class="modal2" id="modal2">
+    <div class="modal-inner2">
+        <h2>HOW TO PLAY</h2>
+        <p><b>Match and Math</b></p>
+        <p>
+          -	Start the game and choose what difficulty you want. <br>
+          -	Random of cards will appear and you must find the right pair of each card.<br>
+          -	For example: 4*4 was your first flip, your second flip should be 16.<br>
+          - Your objective is to find all the matching pairs of each card. Having a mismatch has a punishment and vice versa.<br>
+          -	Remember that your in-game actions will be recorded. The number of Flips, Matches, Mismatches are counted.<br>
+          -	Take note that your time is limited, don't let the bomb explode.<br>
+        </p>
+        <button id="closeModal2">Close</button>        
+    </div>
+  </div>
+
+</body>
+<script>
+
+const openBtn2 = document.getElementById("openModal2");
+const closeBtn2 = document.getElementById("closeModal2");
+const modal2 = document.getElementById("modal2"); 
+
+       openBtn2.addEventListener("click", () => {
+            modal2.classList.add("open");
+        });
+        closeBtn2.addEventListener("click", () => {
+          modal2.classList.remove("open");
+        });
+
+
+
+    function play(){
+        document.getElementById("diffbtn").style.display = "inline";
+        document.getElementById("homebtn").style.display = "none";
+    }
+    function back(){
+        document.getElementById("diffbtn").style.display = "none";
+        document.getElementById("homebtn").style.display = "inline";
+    }
+
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    let interval = null;
+    document.querySelector("h1").onclick = event => {  
+    let iteration = 0;
+    interval = setInterval(() => {
+    event.target.innerText = event.target.innerText
+      .split("")
+      .map((letter, index) => {
+        if(index < iteration) {
+          return event.target.dataset.value[index];
+        }
+      
+        return letters[Math.floor(Math.random() * 36)]
+      })
+      .join("");
+    
+    if(iteration >= event.target.dataset.value.length){ 
+      clearInterval(interval);
+    }
+    
+    iteration += 1 / 3;
+ }, 30);
+}
+
+
+</script>
+</html>
